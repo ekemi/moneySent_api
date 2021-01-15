@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_032051) do
+ActiveRecord::Schema.define(version: 2021_01_15_032744) do
+
+  create_table "locations", force: :cascade do |t|
+    t.string "country"
+    t.string "address"
+    t.integer "sender_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sender_id"], name: "index_locations_on_sender_id"
+  end
 
   create_table "receivers", force: :cascade do |t|
     t.string "first_name"
@@ -33,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_01_15_032051) do
     t.index ["location_id"], name: "index_senders_on_location_id"
   end
 
+  add_foreign_key "locations", "senders"
   add_foreign_key "receivers", "senders"
   add_foreign_key "senders", "locations"
 end
