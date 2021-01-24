@@ -5,7 +5,8 @@ class ReceiversController < ApplicationController
   def index
     @receivers = Receiver.all
 
-    render json: @receivers
+    # render json: @receivers
+    render json: ReceiverSerializer.new(@receivers).serializable_hash[:data].map{|has| has[:attributes]}
   end
 
   # GET /receivers/1
