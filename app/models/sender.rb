@@ -1,3 +1,4 @@
 class Sender < ApplicationRecord
-  belongs_to :location
+  has_many :receivers
+  has_many :locations
 end
